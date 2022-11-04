@@ -6,6 +6,10 @@ type MapRepository struct {
 	storage map[string]*domain.User
 }
 
+func NewMapRepository() *MapRepository {
+	return &MapRepository{storage: make(map[string]*domain.User)}
+}
+
 func (m *MapRepository) Create(user *domain.User) {
 	m.storage[user.Id] = user
 }

@@ -3,8 +3,8 @@ package domain
 import "github.com/google/uuid"
 
 type User struct {
-	Name string
 	Id   string
+	Name string
 }
 
 func NewUser(name string) *User {

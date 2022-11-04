@@ -9,6 +9,10 @@ type Service struct {
 	repo task.Repository
 }
 
+func NewService(repo task.Repository) *Service {
+	return &Service{repo: repo}
+}
+
 func (s *Service) Create(task *domain.Task) {
 	s.repo.Create(task)
 }
