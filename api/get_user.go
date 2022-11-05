@@ -6,12 +6,12 @@ import (
 	"net/http"
 )
 
-func (a *Api) HandleGetTask(c echo.Context) error {
+func (a *Api) HandleGetUser(c echo.Context) error {
 	id := c.FormValue("id")
 
-	task := a.taskService.Get(id)
+	user := a.userService.Get(id)
 
-	bytes, err := json.Marshal(task)
+	bytes, err := json.Marshal(user)
 	if err != nil {
 		return err
 	}
