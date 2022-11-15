@@ -1,0 +1,32 @@
+.App {
+    text-align: center;
+}
+
+.app-header {
+    padding: 10px;
+    text-align: center;
+    background: cyan;
+    color: black;
+    font-size: 30px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.no-data {
+    text-align: center;
+    color: black;
+    font-size: 30px;
+}
+
+.loading-data {
+    text-align: center;
+    color: black;
+    font-size: 30px;
+}
+
+.item-id {
+    flex: 0 0 4rem !important;
+}
+
+.input {
+    padding: 1rem !important;
+}
