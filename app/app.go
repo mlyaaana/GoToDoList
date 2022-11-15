@@ -1,12 +1,14 @@
 package app
 
 import (
-	"github.com/labstack/echo/v4"
 	"todolist/api"
 	taskrepo "todolist/repository/task"
 	userrepo "todolist/repository/user"
 	"todolist/service/task"
 	"todolist/service/user"
+
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
 
 type App struct {
@@ -18,8 +20,12 @@ func New() *App {
 	userService := user.NewService(userrepo.NewMapRepository())
 	taskService := task.NewService(taskrepo.NewMapRepository())
 
+	e := echo.New()
+	e.Use(middleware.Logger())
+	e.Use(middleware.CORS())
+
 	return &App{
-		echo: echo.New(),
+		echo: e,
 		api:  api.NewApi(userService, taskService),
 	}
 }
