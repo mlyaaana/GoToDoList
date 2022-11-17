@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import CreateTaskData from './components/CreateTaskData'
 import TasksData from './components/TasksData'
 import OnLoadingTasksData from './components/LoadingTasksData'
+import url from './util'
 
 function App() {
   const DataLoading = OnLoadingTasksData(TasksData);
@@ -15,21 +16,45 @@ function App() {
     }
   )
 
-  const submit = (event) => {
-    const apiUrl = '/task'
+  const createTask = (name, description) => {
+    const apiUrl = url('task')
 
-    const name = event.target.name.value
-    const description = event.target.description.value
+    axios.post(apiUrl, null, {
+      params: {
+        name,
+        description
+      }
+    })
+      .then((resp) => {
+        const task = resp.data
+        setAppState({
+          loading: appState.loading,
+          tasks: [task, ...appState.tasks]
+        })
+      })
+      .catch((reason) => console.error(reason))
+  }
 
-    axios.post(apiUrl, null, { params: {
-      name,
-      description
-    }}).catch((reason) => console.error(reason))
+  const deleteTask = (id) => {
+    const apiUrl = url('task');
+
+    axios.delete(apiUrl, {
+      params: {
+        id
+      }
+    })
+      .then(_ => {
+        setAppState({
+          loading: appState.loading,
+          tasks: appState.tasks.filter(task => task.Id !== id)
+        })
+      })
+      .catch((reason) => console.error(reason))
   }
 
   useEffect(() => {
     setAppState({ loading: true })
-    const apiUrl = '/tasks';
+    const apiUrl = url('tasks');
     axios.get(apiUrl).then((resp) => {
       const allTasks = JSON.parse(resp.data);
       setAppState({
@@ -45,8 +70,8 @@ function App() {
         <p>Todo List</p>
       </header>
       <div>
-        <CreateTaskData onClick={submit} />
-        <DataLoading isLoading={appState.loading} tasks={appState.tasks} />
+        <CreateTaskData onCreate={createTask} />
+        <DataLoading isLoading={appState.loading} tasks={appState.tasks} onDelete={deleteTask} />
       </div>
     </div>
   );
