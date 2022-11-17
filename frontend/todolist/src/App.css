@@ -27,6 +27,11 @@
     flex: 0 0 4rem !important;
 }
 
+.item-content {
+    flex: 0.95 1 10rem !important;
+    overflow:auto;
+}
+
 .input {
     padding: 1rem !important;
 }
