@@ -31,3 +31,7 @@ func (m *MapRepository) List() []*domain.Task {
 func (m *MapRepository) Delete(id string) {
 	delete(m.storage, id)
 }
+
+func (m *MapRepository) Done(id string) {
+	m.storage[id].Done = !m.storage[id].Done
+}

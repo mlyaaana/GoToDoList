@@ -28,3 +28,7 @@ func (s *Service) List() []*domain.Task {
 func (s *Service) Delete(id string) {
 	s.repo.Delete(id)
 }
+
+func (s *Service) Done(id string) {
+	s.repo.Done(id)
+}

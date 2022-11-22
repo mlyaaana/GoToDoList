@@ -43,4 +43,5 @@ func (a *App) InitRoutes() {
 	a.echo.GET("/user", a.api.HandleGetUser)
 	a.echo.GET("/users", a.api.HandleListUsers)
 	a.echo.DELETE("/user", a.api.HandleDeleteUser)
+	a.echo.PUT("/task", a.api.HandleDoneTask)
 }

@@ -98,3 +98,6 @@ fabric.properties
 
 # Go workspace file
 go.work
+
+# Other
+*/**/.DS_Store

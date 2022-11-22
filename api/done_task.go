@@ -5,10 +5,10 @@ import (
 	"net/http"
 )
 
-func (a *Api) HandleDeleteTask(c echo.Context) error {
+func (a *Api) HandleDoneTask(c echo.Context) error {
 	id := c.FormValue("id")
 
-	a.taskService.Delete(id)
+	a.taskService.Done(id)
 
 	return c.NoContent(http.StatusOK)
 }

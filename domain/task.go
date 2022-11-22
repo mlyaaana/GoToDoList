@@ -8,6 +8,7 @@ type Task struct {
 	Id          string
 	Name        string
 	Description string
+	Done        bool
 }
 
 func NewTask(name, description string) *Task {
@@ -15,5 +16,6 @@ func NewTask(name, description string) *Task {
 		Id:          uuid.New().String(),
 		Name:        name,
 		Description: description,
+		Done:        false,
 	}
 }

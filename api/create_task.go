@@ -13,5 +13,5 @@ func (a *Api) HandleCreateTask(c echo.Context) error {
 	task := domain.NewTask(name, description)
 	a.taskService.Create(task)
 
-	return c.JSON(http.StatusOK, task)
+	return c.JSON(http.StatusCreated, NewTask(task))
 }

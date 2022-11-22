@@ -7,4 +7,5 @@ type Repository interface {
 	Get(id string) *domain.Task
 	List() []*domain.Task
 	Delete(id string)
+	Done(id string)
 }
