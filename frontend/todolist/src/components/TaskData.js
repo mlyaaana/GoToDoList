@@ -1,7 +1,5 @@
 import { Checkbox, IconButton, ListItem, ListItemSecondaryAction, ListItemText } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
-import axios from 'axios';
-import url from '../util'
 
 function TaskData(props) {
     const { task, index, onDelete, onDone } = props
