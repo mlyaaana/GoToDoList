@@ -1,6 +1,8 @@
 package task
 
-import "todolist/domain"
+import (
+	"todolist/domain"
+)
 
 type MapRepository struct {
 	storage map[string]*domain.Task
@@ -34,4 +36,15 @@ func (m *MapRepository) Delete(id string) {
 
 func (m *MapRepository) Done(id string) {
 	m.storage[id].Done = !m.storage[id].Done
+}
+
+func (m *MapRepository) ListCompletedTasks() []*domain.Task {
+	result := make([]*domain.Task, 0)
+	for _, v := range m.storage {
+		if v.Done {
+			result = append(result, v)
+		}
+	}
+
+	return result
 }

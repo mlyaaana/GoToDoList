@@ -32,3 +32,7 @@ func (s *Service) Delete(id string) {
 func (s *Service) Done(id string) {
 	s.repo.Done(id)
 }
+
+func (s *Service) ListCompletedTasks() []*domain.Task {
+	return s.repo.ListCompletedTasks()
+}

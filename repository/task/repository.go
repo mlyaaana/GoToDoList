@@ -8,4 +8,5 @@ type Repository interface {
 	List() []*domain.Task
 	Delete(id string)
 	Done(id string)
+	ListCompletedTasks() []*domain.Task
 }
