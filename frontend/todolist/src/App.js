@@ -46,7 +46,29 @@ function App() {
       .then(_ => {
         setAppState({
           loading: appState.loading,
-          tasks: appState.tasks.filter(task => task.Id !== id)
+          tasks: appState.tasks.filter(task => task.id !== id)
+        })
+      })
+      .catch((reason) => console.error(reason))
+  }
+
+  const doneTask = (id) => {
+    const apiUrl = url('task')
+
+    axios.put(apiUrl, null, {
+      params: {
+        id
+      }
+    })
+      .then((_) => {
+        const tasks = appState.tasks
+        const index = tasks.findIndex(t => t.id === id)
+        const task = tasks[index]
+        task.done = !task.done
+        
+        setAppState({
+          loading: appState.loading,
+          tasks: tasks,
         })
       })
       .catch((reason) => console.error(reason))
@@ -56,7 +78,7 @@ function App() {
     setAppState({ loading: true })
     const apiUrl = url('tasks');
     axios.get(apiUrl).then((resp) => {
-      const allTasks = JSON.parse(resp.data);
+      const allTasks = resp.data;
       setAppState({
         loading: false,
         tasks: allTasks
@@ -71,7 +93,7 @@ function App() {
       </header>
       <div>
         <CreateTaskData onCreate={createTask} />
-        <DataLoading isLoading={appState.loading} tasks={appState.tasks} onDelete={deleteTask} />
+        <DataLoading isLoading={appState.loading} tasks={appState.tasks} onDelete={deleteTask} onDone={doneTask} />
       </div>
     </div>
   );
