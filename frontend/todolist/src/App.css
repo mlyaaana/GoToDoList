@@ -29,7 +29,7 @@
 
 .item-content {
     flex: 0.95 1 10rem !important;
-    overflow:auto;
+    overflow: auto;
 }
 
 .input {

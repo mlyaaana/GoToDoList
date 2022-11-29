@@ -1,5 +1,5 @@
 function OnLoadingTasksData(Component) {
-    return function LoadingTasksData({ isLoading, ...props }) {
+    return function LoadingTasksData({isLoading, ...props}) {
         if (!isLoading) return <Component {...props} />
 
         else return (

@@ -1,8 +1,9 @@
 package domain
 
 import (
-	"github.com/google/uuid"
 	"time"
+
+	"github.com/google/uuid"
 )
 
 type Task struct {
@@ -20,7 +21,7 @@ func NewTask(name, description string, deadline time.Time) *Task {
 		Name:        name,
 		Description: description,
 		Done:        false,
-		CreatedAt:   time.Now(),
+		CreatedAt:   time.Now().UTC(),
 		Deadline:    deadline,
 	}
 }

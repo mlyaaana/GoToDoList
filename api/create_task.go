@@ -1,16 +1,25 @@
 package api
 
 import (
-	"github.com/labstack/echo/v4"
 	"net/http"
+	"time"
+
+	"github.com/labstack/echo/v4"
 	"todolist/domain"
 )
 
 func (a *Api) HandleCreateTask(c echo.Context) error {
-	name := c.FormValue("name")
-	description := c.FormValue("description")
+	body := struct {
+		Name        string    `json:"name"`
+		Description string    `json:"description"`
+		Deadline    time.Time `json:"deadline"`
+	}{}
 
-	task := domain.NewTask(name, description)
+	if err := c.Bind(&body); err != nil {
+		return err
+	}
+
+	task := domain.NewTask(body.Name, body.Description, body.Deadline.UTC())
 	a.taskService.Create(task)
 
 	return c.JSON(http.StatusCreated, NewTask(task))

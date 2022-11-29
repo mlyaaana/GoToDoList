@@ -1,8 +1,8 @@
-import { Checkbox, IconButton, ListItem, ListItemSecondaryAction, ListItemText } from '@material-ui/core';
+import {Checkbox, IconButton, ListItem, ListItemSecondaryAction, ListItemText} from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 function TaskData(props) {
-    const { task, index, onDelete, onDone } = props
+    const {task, index, onDelete, onDone} = props
 
     return (
         <ListItem divider={true}>
@@ -21,9 +21,9 @@ function TaskData(props) {
             />
             <ListItemSecondaryAction>
                 <IconButton aria-label="delete" onClick={() => onDelete(task.id)}>
-                    <DeleteIcon />
+                    <DeleteIcon/>
                 </IconButton>
-                <Checkbox checked={task.done} onClick={() => onDone(task.id)} />
+                <Checkbox checked={task.done} onClick={() => onDone(task.id)}/>
             </ListItemSecondaryAction>
         </ListItem>
     )
