@@ -2,8 +2,10 @@ package app
 
 import (
 	"todolist/api"
+	"todolist/repository/credentials"
 	taskrepo "todolist/repository/task"
 	userrepo "todolist/repository/user"
+	"todolist/service/auth"
 	"todolist/service/task"
 	"todolist/service/user"
 
@@ -17,8 +19,10 @@ type App struct {
 }
 
 func New() *App {
-	userService := user.NewService(userrepo.NewMapRepository())
+	userRepository := userrepo.NewMapRepository()
+	userService := user.NewService(userRepository)
 	taskService := task.NewService(taskrepo.NewMapRepository())
+	authService := auth.NewService(credentials.NewMapRepository(), userRepository)
 
 	e := echo.New()
 	e.Use(middleware.Logger())
@@ -26,7 +30,7 @@ func New() *App {
 
 	return &App{
 		echo: e,
-		api:  api.NewApi(userService, taskService),
+		api:  api.NewApi(userService, taskService, authService),
 	}
 }
 
@@ -44,5 +48,5 @@ func (a *App) InitRoutes() {
 	a.echo.GET("/users", a.api.HandleListUsers)
 	a.echo.DELETE("/user", a.api.HandleDeleteUser)
 	a.echo.PUT("/task", a.api.HandleDoneTask)
-	a.echo.GET("/completed_task", a.api.HandleListCompletedTasks)
+	a.echo.GET("/tasks/completed", a.api.HandleListCompletedTasks)
 }

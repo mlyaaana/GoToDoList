@@ -1,6 +1,9 @@
 package user
 
-import "todolist/domain"
+import (
+	"errors"
+	"todolist/domain"
+)
 
 type MapRepository struct {
 	storage map[string]*domain.User
@@ -10,8 +13,15 @@ func NewMapRepository() *MapRepository {
 	return &MapRepository{storage: make(map[string]*domain.User)}
 }
 
-func (m *MapRepository) Create(user *domain.User) {
+func (m *MapRepository) Create(user *domain.User) error {
+	for _, v := range m.storage {
+		if v.Name == user.Name {
+			return errors.New("имя занято")
+		}
+	}
 	m.storage[user.Id] = user
+
+	return nil
 }
 
 func (m *MapRepository) Get(id string) *domain.User {
