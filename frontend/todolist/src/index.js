@@ -1,15 +1,38 @@
 import React from 'react'
 
 import ReactDOM from 'react-dom/client'
+import {
+  createBrowserRouter,
+  RouterProvider
+} from 'react-router-dom'
 
 import './index.css'
-import App from './App'
+import ErrorPage from './components/error/ErrorPage'
+import Login from './components/login/Login'
+import Register from './components/register/Register'
+import Tasks from './components/tasks/Tasks'
 import reportWebVitals from './reportWebVitals'
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Tasks />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: '/login',
+    element: <Login />
+  },
+  {
+    path: '/register',
+    element: <Register />
+  }
+])
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
     <React.StrictMode>
-        <App/>
+        <RouterProvider router={router} />
     </React.StrictMode>
 )
 

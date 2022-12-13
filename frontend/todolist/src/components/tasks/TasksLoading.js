@@ -1,6 +1,6 @@
 import React from 'react'
 
-function OnLoadingTasksData (Component) {
+function OnLoadingTasks (Component) {
   return function LoadingTasksData ({ isLoading, ...props }) {
     if (!isLoading) return <Component {...props} />
 
@@ -14,4 +14,4 @@ function OnLoadingTasksData (Component) {
   }
 }
 
-export default OnLoadingTasksData
+export default OnLoadingTasks
