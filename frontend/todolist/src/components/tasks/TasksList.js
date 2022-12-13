@@ -2,9 +2,9 @@ import React from 'react'
 
 import List from '@material-ui/core/List'
 
-import TaskData from './TaskData'
+import TaskItem from './TaskItem'
 
-function TasksData (props) {
+function TasksList (props) {
   const { tasks, onDelete, onDone } = props
 
   if (!tasks || tasks.length === 0) return <p className="no-data">Нет данных.</p>
@@ -12,7 +12,7 @@ function TasksData (props) {
   return (
         <List>
             {
-                tasks.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt)).map((task, index) => <TaskData
+                tasks.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt)).map((task, index) => <TaskItem
                     key={task.id}
                     task={task}
                     index={index}
@@ -23,4 +23,4 @@ function TasksData (props) {
   )
 }
 
-export default TasksData
+export default TasksList

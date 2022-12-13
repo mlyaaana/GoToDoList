@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Button } from '@material-ui/core'
 import TextField from '@material-ui/core/TextField'
 
-function CreateTaskData (props) {
+function CreateTask (props) {
   const { onCreate } = props
 
   const [name, setName] = useState('')
@@ -49,4 +49,4 @@ function CreateTaskData (props) {
   )
 }
 
-export default CreateTaskData
+export default CreateTask

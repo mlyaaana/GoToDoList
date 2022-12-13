@@ -1,16 +1,16 @@
-import './App.css'
+import '../../App.css'
 import React, { useEffect, useState } from 'react'
 
 import axios from 'axios'
 import humps from 'humps'
 
-import CreateTaskData from './components/CreateTaskData'
-import OnLoadingTasksData from './components/LoadingTasksData'
-import TasksData from './components/TasksData'
-import url from './util'
+import url from '../../util'
+import CreateTask from './CreateTask'
+import TasksList from './TasksList'
+import OnLoadingTasks from './TasksLoading'
 
-function App () {
-  const DataLoading = OnLoadingTasksData(TasksData)
+function Tasks () {
+  const DataLoading = OnLoadingTasks(TasksList)
 
   const [appState, setAppState] = useState(
     {
@@ -94,7 +94,7 @@ function App () {
                 <p>Todo List</p>
             </header>
             <div>
-                <CreateTaskData onCreate={createTask} />
+                <CreateTask onCreate={createTask} />
                 <DataLoading isLoading={appState.loading} tasks={appState.tasks} onDelete={deleteTask}
                     onDone={doneTask} />
             </div>
@@ -102,4 +102,4 @@ function App () {
   )
 }
 
-export default App
+export default Tasks
