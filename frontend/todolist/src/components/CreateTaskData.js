@@ -1,24 +1,25 @@
-import React, {useState} from 'react';
-import {Button} from '@material-ui/core';
-import TextField from '@material-ui/core/TextField';
+import React, { useState } from 'react'
 
-function CreateTaskData(props) {
-    const {onCreate} = props
+import { Button } from '@material-ui/core'
+import TextField from '@material-ui/core/TextField'
 
-    const [name, setName] = useState("")
-    const [description, setDescription] = useState("")
-    const [deadline, setDeadline] = useState(new Date())
+function CreateTaskData (props) {
+  const { onCreate } = props
 
-    const createTask = (event) => {
-        event.preventDefault()
+  const [name, setName] = useState('')
+  const [description, setDescription] = useState('')
+  const [deadline, setDeadline] = useState(new Date())
 
-        onCreate(name, description, deadline)
-        setName("")
-        setDescription("")
-        setDeadline(new Date())
-    }
+  const createTask = (event) => {
+    event.preventDefault()
 
-    return (
+    onCreate(name, description, deadline)
+    setName('')
+    setDescription('')
+    setDeadline(new Date())
+  }
+
+  return (
         <form onSubmit={createTask}>
             <TextField
                 name="name"
@@ -26,7 +27,7 @@ function CreateTaskData(props) {
                 value={name}
                 required
                 multiline
-                classes={{root: 'input'}}
+                classes={{ root: 'input' }}
                 onChange={(e) => setName(e.target.value)}
             />
             <TextField
@@ -34,18 +35,18 @@ function CreateTaskData(props) {
                 placeholder="Description"
                 value={description}
                 multiline
-                classes={{root: 'input'}}
+                classes={{ root: 'input' }}
                 onChange={(e) => setDescription(e.target.value)}
             />
             <TextField
                 type="datetime-local"
-                classes={{root: 'input'}}
+                classes={{ root: 'input' }}
                 onChange={(e) => setDeadline(new Date(e.target.value))}
             />
-            <br/>
+            <br />
             <Button variant="outlined" type="submit">Create</Button>
         </form>
-    )
+  )
 }
 
 export default CreateTaskData
