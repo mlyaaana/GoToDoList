@@ -1,32 +1,34 @@
-import {Checkbox, IconButton, ListItem, ListItemSecondaryAction, ListItemText} from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/Delete';
+import React from 'react'
 
-function TaskData(props) {
-    const {task, index, onDelete, onDone} = props
+import { Checkbox, IconButton, ListItem, ListItemSecondaryAction, ListItemText } from '@material-ui/core'
+import DeleteIcon from '@material-ui/icons/Delete'
 
-    return (
+function TaskData (props) {
+  const { task, index, onDelete, onDone } = props
+
+  return (
         <ListItem divider={true}>
             <ListItemText
                 primary={index + 1}
                 classes={{
-                    root: 'item-id'
+                  root: 'item-id'
                 }}
             />
             <ListItemText
                 primary={task.name}
                 secondary={task.description}
                 classes={{
-                    root: 'item-content'
+                  root: 'item-content'
                 }}
             />
             <ListItemSecondaryAction>
                 <IconButton aria-label="delete" onClick={() => onDelete(task.id)}>
-                    <DeleteIcon/>
+                    <DeleteIcon />
                 </IconButton>
-                <Checkbox checked={task.done} onClick={() => onDone(task.id)}/>
+                <Checkbox checked={task.done} onClick={() => onDone(task.id)} />
             </ListItemSecondaryAction>
         </ListItem>
-    )
+  )
 }
 
-export default TaskData;
+export default TaskData

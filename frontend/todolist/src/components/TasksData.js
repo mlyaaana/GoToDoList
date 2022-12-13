@@ -1,12 +1,15 @@
-import List from '@material-ui/core/List';
-import TaskData from './TaskData';
+import React from 'react'
 
-function TasksData(props) {
-    const {tasks, onDelete, onDone} = props
+import List from '@material-ui/core/List'
 
-    if (!tasks || tasks.length === 0) return <p className="no-data">Нет данных.</p>
+import TaskData from './TaskData'
 
-    return (
+function TasksData (props) {
+  const { tasks, onDelete, onDone } = props
+
+  if (!tasks || tasks.length === 0) return <p className="no-data">Нет данных.</p>
+
+  return (
         <List>
             {
                 tasks.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt)).map((task, index) => <TaskData
@@ -17,7 +20,7 @@ function TasksData(props) {
                     onDone={onDone}/>)
             }
         </List>
-    )
+  )
 }
 
 export default TasksData
