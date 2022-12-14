@@ -49,4 +49,6 @@ func (a *App) InitRoutes() {
 	a.echo.DELETE("/user", a.api.HandleDeleteUser)
 	a.echo.PUT("/task", a.api.HandleDoneTask)
 	a.echo.GET("/tasks/completed", a.api.HandleListCompletedTasks)
+	a.echo.GET("/register", a.api.HandleRegister)
+	a.echo.GET("/auth", a.api.HandleAuth)
 }
