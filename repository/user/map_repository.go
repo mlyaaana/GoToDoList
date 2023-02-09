@@ -2,6 +2,7 @@ package user
 
 import (
 	"errors"
+	"fmt"
 	"todolist/domain"
 )
 
@@ -24,8 +25,13 @@ func (m *MapRepository) Create(user *domain.User) error {
 	return nil
 }
 
-func (m *MapRepository) Get(id string) *domain.User {
-	return m.storage[id]
+func (m *MapRepository) Get(id string) (*domain.User, error) {
+	user, ok := m.storage[id]
+	if !ok {
+		return nil, fmt.Errorf("user not found")
+	}
+
+	return user, nil
 }
 
 func (m *MapRepository) List() []*domain.User {

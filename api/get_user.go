@@ -9,7 +9,9 @@ import (
 func (a *Api) HandleGetUser(c echo.Context) error {
 	id := c.FormValue("id")
 
-	user := a.userService.Get(id)
-
+	user, err := a.userService.Get(id)
+	if err != nil {
+		return err
+	}
 	return c.JSON(http.StatusOK, user)
 }

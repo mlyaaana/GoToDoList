@@ -7,7 +7,10 @@ import (
 )
 
 func (a *Api) HandleListTasks(c echo.Context) error {
-	tasks := a.taskService.List()
+	tasks, err := a.taskService.List()
+	if err != nil {
+		return err
+	}
 
 	return c.JSON(http.StatusOK, NewTasks(tasks))
 }

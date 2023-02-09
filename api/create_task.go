@@ -20,7 +20,10 @@ func (a *Api) HandleCreateTask(c echo.Context) error {
 	}
 
 	task := domain.NewTask(body.Name, body.Description, body.Deadline.UTC())
-	a.taskService.Create(task)
+	err := a.taskService.Create(task)
+	if err != nil {
+		return err
+	}
 
 	return c.JSON(http.StatusCreated, NewTask(task))
 }

@@ -11,7 +11,10 @@ func (a *Api) HandleCreateUser(c echo.Context) error {
 	name := c.FormValue("name")
 
 	user := domain.NewUser(name)
-	a.userService.Create(user)
+	err := a.userService.Create(user)
+	if err != nil {
+		return err
+	}
 
 	return c.JSON(http.StatusCreated, user)
 }

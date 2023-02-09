@@ -9,7 +9,10 @@ import (
 func (a *Api) HandleGetTask(c echo.Context) error {
 	id := c.FormValue("id")
 
-	task := a.taskService.Get(id)
+	task, err := a.taskService.Get(id)
+	if err != nil {
+		return err
+	}
 
 	return c.JSON(http.StatusOK, NewTask(task))
 }

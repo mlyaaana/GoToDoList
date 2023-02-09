@@ -13,15 +13,15 @@ func NewService(repo user.Repository) *Service {
 	return &Service{repo: repo}
 }
 
-func (s *Service) Create(user *domain.User) {
-	s.repo.Create(user)
+func (s *Service) Create(user *domain.User) error {
+	return s.repo.Create(user)
 }
 
-func (s *Service) Get(id string) *domain.User {
+func (s *Service) Get(id string) (*domain.User, error) {
 	return s.repo.Get(id)
 }
 
-func (s *Service) List() []*domain.User {
+func (s *Service) List() ([]*domain.User, error) {
 	return s.repo.List()
 }
 

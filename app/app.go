@@ -2,6 +2,7 @@ package app
 
 import (
 	"todolist/api"
+	"todolist/database"
 	"todolist/repository/credentials"
 	taskrepo "todolist/repository/task"
 	userrepo "todolist/repository/user"
@@ -19,10 +20,14 @@ type App struct {
 }
 
 func New() *App {
-	userRepository := userrepo.NewMapRepository()
+	db, err := database.New()
+	if err != nil {
+		panic(err)
+	}
+	userRepository := userrepo.NewDBRepository(db)
 	userService := user.NewService(userRepository)
-	taskService := task.NewService(taskrepo.NewMapRepository())
-	authService := auth.NewService(credentials.NewMapRepository(), userRepository)
+	taskService := task.NewService(taskrepo.NewDBRepository(db))
+	authService := auth.NewService(credentials.NewDBRepository(db), userRepository)
 
 	e := echo.New()
 	e.Use(middleware.Logger())

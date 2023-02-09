@@ -4,7 +4,7 @@ import "todolist/domain"
 
 type Repository interface {
 	Create(user *domain.User) error
-	Get(id string) *domain.User
-	List() []*domain.User
+	Get(id string) (*domain.User, error)
+	List() ([]*domain.User, error)
 	Delete(id string)
 }

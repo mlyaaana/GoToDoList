@@ -24,7 +24,10 @@ func (s *Service) Register(username, password string) (string, error) {
 	if err := s.userRepo.Create(u); err != nil {
 		return "", err
 	}
-	s.credentialsRepo.Create(c)
+	err := s.credentialsRepo.Create(c)
+	if err != nil {
+		return "", err
+	}
 	return u.Id, nil
 }
 
